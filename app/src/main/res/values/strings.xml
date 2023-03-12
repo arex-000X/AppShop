@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AppShop</string>
+    <string name="auth_logo_signin">Sign in</string>
+    <string name="auth_first_name">First name</string>
+    <string name="auth_last_name">Last name</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_confirm_password">Confirm password</string>
+    <string name="auth_create_password_btn">Create account</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_already">Already have an account?</string>
+    <string name="auth_login_link">Log in</string>
+    <string name="auth_login_button">Login</string>
+    <string name="auth_sign_google">Sign in with Google</string>
+    <string name="auth_sign_apple">Sign in with Apple</string>
+    <string name="field_is_empty">field is empty</string>
+</resources>

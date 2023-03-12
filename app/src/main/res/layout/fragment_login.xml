@@ -1,0 +1,76 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAF9FF"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textview_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Welcome to back"
+        android:textColor="@color/black_custom"
+        android:textSize="26dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17000002" />
+
+    <EditText
+        android:id="@+id/LoginFirstName"
+        android:layout_width="303dp"
+        android:layout_height="33dp"
+        android:background="@drawable/form_input"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_thin"
+        android:gravity="center"
+        android:hint="@string/auth_first_name"
+        android:textColor="@color/black_custom"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_sign_in"
+        app:layout_constraintVertical_bias="0.19999999" />
+
+    <EditText
+        android:id="@+id/LoginPassword"
+        android:layout_width="303dp"
+        android:layout_height="33dp"
+        android:background="@drawable/form_input"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_thin"
+        android:gravity="center"
+        android:hint="@string/auth_password"
+        android:inputType="textPassword"
+        android:textColor="@color/black_custom"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_sign_in"
+        app:layout_constraintVertical_bias="0.3" />
+
+
+    <Button
+        android:id="@+id/button_create"
+        android:layout_width="305dp"
+        android:layout_height="58dp"
+        android:background="@drawable/button_sign_in"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="@string/auth_login_button"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84000003" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
