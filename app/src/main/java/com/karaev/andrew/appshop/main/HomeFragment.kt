@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.karaev.andrew.appshop.R
-import com.karaev.andrew.appshop.interfaceCLick.CallBackClick
+import com.karaev.andrew.appshop.interfaceCLick.FragmentReplace
 import com.karaev.andrew.appshop.main.fragment.LikeFragment
 import com.karaev.andrew.appshop.main.fragment.MessageFragment
 import com.karaev.andrew.appshop.main.fragment.PersonFragment
@@ -16,7 +16,7 @@ import com.karaev.andrew.appshop.main.fragment.ShopFragment
 
 class HomeFragment:Fragment() {
     lateinit var bottomnav:BottomNavigationView
-    val callBackClick = context as CallBackClick?
+    val fragmentReplace = context as FragmentReplace?
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -41,11 +41,11 @@ class HomeFragment:Fragment() {
         bottomnav = view.findViewById(R.id.bottomNav)
         bottomnav.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.page_1 -> callBackClick?.onClick(HomeFragment(),false)
-                R.id.page_2 -> callBackClick?.onClick(LikeFragment(),false)
-                R.id.page_3 -> callBackClick?.onClick(ShopFragment(),false)
-                R.id.page_4 -> callBackClick?.onClick(MessageFragment(),false)
-                R.id.page_5 -> callBackClick?.onClick(PersonFragment(),false)
+                R.id.page_1 -> fragmentReplace?.fragmentReplaceManager(HomeFragment(),false)
+                R.id.page_2 -> fragmentReplace?.fragmentReplaceManager(LikeFragment(),false)
+                R.id.page_3 -> fragmentReplace?.fragmentReplaceManager(ShopFragment(),false)
+                R.id.page_4 -> fragmentReplace?.fragmentReplaceManager(MessageFragment(),false)
+                R.id.page_5 -> fragmentReplace?.fragmentReplaceManager(PersonFragment(),false)
             }
             return@setOnItemSelectedListener true
         }
