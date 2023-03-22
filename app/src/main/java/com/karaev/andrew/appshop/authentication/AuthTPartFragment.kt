@@ -2,18 +2,19 @@ package com.karaev.andrew.appshop.authentication
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.Manifest.permission.CAMERA
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.textfield.TextInputEditText
-import com.karaev.andrew.appshop.CameraXActivity
 import com.karaev.andrew.appshop.R
 import com.karaev.andrew.appshop.authentication.viewmodel.AuthViewModel
 import com.karaev.andrew.appshop.databinding.FragmentParttwoBinding
@@ -24,6 +25,7 @@ const val REQUEST_CODE = 20
 
 class AuthTPartFragment : Fragment() {
     private var activivtyReplace: FragmentReplace? = null
+    private val requestPermission = listOf(CAMERA)
     lateinit var binding:FragmentParttwoBinding
     private val viewmodel: AuthViewModel by lazy { ViewModelProvider(this).get(AuthViewModel::class.java) }
 
@@ -56,8 +58,7 @@ class AuthTPartFragment : Fragment() {
             lastName.text = instance.users.lastName
             photoCameraAdd.setOnClickListener {
                 photoCameraAdd.startAnimation(mAlphaAnimation)
-                val intent = Intent(context, CameraXActivity::class.java)
-                startActivity(intent)
+               askPermission()
             }
             buttonCreate.setOnClickListener {
                 buttonCreate.startAnimation(mAlphaAnimation)
@@ -69,6 +70,22 @@ class AuthTPartFragment : Fragment() {
 
 
     }
+
+fun askPermission(){
+    if(ContextCompat.checkSelfPermission(this.requireContext(),CAMERA) != PackageManager.PERMISSION_GRANTED ){
+        ActivityCompat.requestPermissions(this.requireActivity(),
+            requestPermission.toTypedArray(),101)
+    } else{
+        openCamera()
+    }
+}
+
+    fun openCamera(){
+        val intent = Intent()
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivity(intent)
+    }
+
 
 
     override fun onDestroy() {
