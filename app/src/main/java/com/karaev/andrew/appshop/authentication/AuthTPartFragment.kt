@@ -1,5 +1,6 @@
 package com.karaev.andrew.appshop.authentication
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,6 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.Manifest.permission.CAMERA
+import android.graphics.Bitmap
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,7 +30,8 @@ const val REQUEST_CODE = 20
 class AuthTPartFragment : Fragment() {
     private var activivtyReplace: FragmentReplace? = null
     private val requestPermission = listOf(CAMERA)
-    lateinit var binding:FragmentParttwoBinding
+    private lateinit var image:Bitmap
+    private lateinit var binding:FragmentParttwoBinding
     private val viewmodel: AuthViewModel by lazy { ViewModelProvider(this).get(AuthViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +63,8 @@ class AuthTPartFragment : Fragment() {
             lastName.text = instance.users.lastName
             photoCameraAdd.setOnClickListener {
                 photoCameraAdd.startAnimation(mAlphaAnimation)
-               askPermission()
+                askPermission()
+
             }
             buttonCreate.setOnClickListener {
                 buttonCreate.startAnimation(mAlphaAnimation)
@@ -75,18 +81,26 @@ fun askPermission(){
     if(ContextCompat.checkSelfPermission(this.requireContext(),CAMERA) != PackageManager.PERMISSION_GRANTED ){
         ActivityCompat.requestPermissions(this.requireActivity(),
             requestPermission.toTypedArray(),101)
+
+
     } else{
-        openCamera()
+       openCamera()
     }
 }
 
     fun openCamera(){
         val intent = Intent()
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivity(intent)
+        launcher.launch(intent)
+
     }
 
-
+val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+   if (it.resultCode == 101 ){
+        image = it.data?.extras?.getString("data") as Bitmap
+       binding.photoCameraAdd.setImageBitmap(image)
+   }
+}
 
     override fun onDestroy() {
         super.onDestroy()
