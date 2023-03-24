@@ -1,5 +1,6 @@
 package com.karaev.andrew.appshop
 
+import android.app.FragmentTransaction
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,28 +31,34 @@ class MainActivity : AppCompatActivity(), FragmentReplace {
         //--------------------------------------------------------------------------------------
 
     }
+
     //Fragment Replace----------------------------------------------------------------------
-    override fun fragmentReplaceManager(fragment: Fragment,addtoBackStatus:Boolean,) {
+    override fun fragmentReplaceManager(
+        fragment: Fragment,
+        addtoBackStatus: Boolean,
+    ) {
+
+
         when (addtoBackStatus) {
             true -> {
-
-                supportFragmentManager.beginTransaction().addToBackStack(null)
-                    .replace(R.id.fragment_container, fragment).commit()
-
+                addFragmentBackButton(fragment)
             }
             false -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit()
+                addFragment(fragment)
             }
         }
 
+
     }
 
+    override fun addFragmentBackButton(fm: Fragment) {
+        supportFragmentManager.beginTransaction().addToBackStack(null)
+            .replace(R.id.fragment_container, fm).commit()
+    }
 
-    //-------------------------------------------------------------------------------------
-    //Camera create------------------------------------------------------------------------
-
-
-
+    override fun addFragment(fm: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fm).commit()
+    }
 
 }
