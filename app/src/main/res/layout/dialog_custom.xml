@@ -23,44 +23,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100000024" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <LinearLayout
-        android:id="@+id/linearGroupButton"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/textview_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Camera"
+        android:textColor="@color/black_custom"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_dialog"
-        app:layout_constraintVertical_bias="0.25">
+        app:layout_constraintVertical_bias="0.50" />
 
-        <Button
-            android:id="@+id/button_camera"
-            android:layout_width="0.0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@drawable/button_sign_in"
-            android:fontFamily="@font/montserrat_thin"
-            android:text="Camera"
-            android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/button_file"
-            android:layout_width="0.0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/button_sign_in"
-            android:fontFamily="@font/montserrat_thin"
-            android:text="File"
-            android:textColor="@color/white" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textview_file"
+        android:layout_width="42dp"
+        android:layout_height="27dp"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="File"
+        android:textColor="@color/black_custom"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_dialog"
+        app:layout_constraintVertical_bias="0.50" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

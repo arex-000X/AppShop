@@ -7,13 +7,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.karaev.andrew.appshop.R
@@ -28,7 +32,6 @@ const val REQUEST_CODE = 20
 
 class AuthTPartFragment : Fragment() {
     private var activivtyReplace: FragmentReplace? = null
-    private lateinit var image: Bitmap
     private val requestPermission = listOf(Manifest.permission.CAMERA)
     private lateinit var binding: FragmentParttwoBinding
     private val viewmodel: AuthViewModel by lazy { ViewModelProvider(this).get(AuthViewModel::class.java) }
@@ -82,13 +85,15 @@ class AuthTPartFragment : Fragment() {
         dialog.apply {
             setContentView(binding.root)
             setCancelable(true)
-            binding.buttonCamera.setOnClickListener {
-                binding.buttonCamera.startAnimation(mAlphaAnimation)
-                askPermission()
+            binding.textviewCamera.setOnClickListener {
+                binding.textviewCamera.startAnimation(mAlphaAnimation)
+           //     askPermission()
                 dialog.dismiss()
             }
-            binding.buttonFile.setOnClickListener {
-                binding.buttonFile.startAnimation(mAlphaAnimation)
+            binding.textviewFile.setOnClickListener {
+                binding.textviewFile.startAnimation(mAlphaAnimation)
+                dialog.dismiss()
+                pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
             show()
         }
@@ -96,7 +101,11 @@ class AuthTPartFragment : Fragment() {
 
     }
 
-    fun askPermission() {
+
+
+    //------------------------------------------------------------------------------------------------------------------
+   /*
+   fun askPermission() {
         if (ContextCompat.checkSelfPermission(
                 this.requireContext(),
                 Manifest.permission.CAMERA
@@ -109,25 +118,38 @@ class AuthTPartFragment : Fragment() {
 
 
         } else {
-            openCamera()
+          //  openCamera()
         }
     }
 
-    fun openCamera() {
+   fun openCamera() {
         val intent = Intent()
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE)
         launcher.launch(intent)
 
     }
-
-
-    val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    }
+   val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == 101) {
-            /*   image = it.data?.extras?.getString("data") as Bitmap
-              binding.photoCameraAdd.setImageBitmap(image) */
-
+           val image = it.data?.extras?.getString("data") as Bitmap
+             binding.photoCameraAdd.setImageBitmap(image)
+            Log.d("PhotoPicker", "Selected URI: $image")
         }
     }
+    */
+    //------------------------------------------------------------------------------------------------------------------
+
+    val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+
+        if (uri != null) {
+            binding.photoCameraAdd.setImageURI(uri)
+            Log.d("PhotoPicker", "Selected URI: $uri")
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+    }
+
+
 
 
     override fun onDestroy() {

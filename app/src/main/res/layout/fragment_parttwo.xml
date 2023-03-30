@@ -1,113 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FAF9FF">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FAF9FF">
+
+
+        <ImageView
+            android:id="@+id/photoCameraAdd"
+            android:layout_width="211dp"
+            android:layout_height="171dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/add_photo"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            />
 
 
 
-    <ImageView
-        android:id="@+id/photoCameraAdd"
-        android:layout_width="211dp"
-        android:layout_height="171dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/add_photo" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoCameraAdd"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/first_name"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_thin"
-            android:padding="2dp"
-            android:textColor="@color/black_custom"
-            android:textSize="24sp" />
+            android:orientation="horizontal"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoCameraAdd"
+            app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/last_name"
+            <TextView
+                android:id="@+id/first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_thin"
+                android:padding="2dp"
+                android:textColor="@color/black_custom"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_thin"
+                android:padding="2dp"
+                android:textColor="@color/black_custom"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/form_input"
+            android:ems="10"
             android:fontFamily="@font/montserrat_thin"
-            android:padding="2dp"
+            android:gravity="center"
+            android:hint="@string/auth_password"
+            android:inputType="textPassword"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             android:textColor="@color/black_custom"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:textColorHint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.19999999" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPasswordConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_input"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_thin"
+            android:gravity="center"
+            android:hint="@string/auth_confirm_password"
+            android:inputType="textPassword"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/black_custom"
+            android:textColorHint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.39" />
+
+        <Button
+            android:id="@+id/button_create"
+            android:layout_width="305dp"
+            android:layout_height="58dp"
+            android:background="@drawable/button_sign_in"
+            android:fontFamily="@font/montserrat_thin"
+            android:text="@string/auth_create_password_btn"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirm" />
 
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/form_input"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_thin"
-        android:gravity="center"
-        android:hint="@string/auth_password"
-        android:inputType="textPassword"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:textColor="@color/black_custom"
-        android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.19999999" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTextPasswordConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/form_input"
-        android:ems="10"
-        android:fontFamily="@font/montserrat_thin"
-        android:gravity="center"
-        android:hint="@string/auth_confirm_password"
-        android:inputType="textPassword"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:textColor="@color/black_custom"
-        android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.39" />
-
-    <Button
-        android:id="@+id/button_create"
-        android:layout_width="305dp"
-        android:layout_height="58dp"
-        android:background="@drawable/button_sign_in"
-        android:fontFamily="@font/montserrat_thin"
-        android:text="@string/auth_create_password_btn"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirm" />
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
