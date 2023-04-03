@@ -1,17 +1,12 @@
 package com.karaev.andrew.appshop
 
-import android.app.FragmentTransaction
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.view.PreviewView
 import androidx.fragment.app.Fragment
 import com.karaev.andrew.appshop.authentication.AuthFragment
 import com.karaev.andrew.appshop.interfaceCLick.FragmentReplace
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
-import androidx.lifecycle.LifecycleOwner
 
 class MainActivity : AppCompatActivity(), FragmentReplace {
     lateinit var cameraFrameLAyout: PreviewView
@@ -60,5 +55,8 @@ class MainActivity : AppCompatActivity(), FragmentReplace {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fm).commit()
     }
+
+
+
 
 }
