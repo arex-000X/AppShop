@@ -1,25 +1,17 @@
 package com.karaev.andrew.appshop.authentication
 
 import android.Manifest
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.karaev.andrew.appshop.CameraXFragment
 import com.karaev.andrew.appshop.R
 import com.karaev.andrew.appshop.authentication.viewmodel.AuthViewModel
 import com.karaev.andrew.appshop.databinding.DialogCustomBinding
@@ -31,8 +23,8 @@ import com.karaev.andrew.appshop.model.UserModel
 const val REQUEST_CODE = 20
 
 class AuthTPartFragment : Fragment() {
-    private var activivtyReplace: FragmentReplace? = null
-    private val requestPermission = listOf(Manifest.permission.CAMERA)
+    private var fragmentReplace: FragmentReplace? = null
+   // private val requestPermission = listOf(Manifest.permission.CAMERA)
     private lateinit var binding: FragmentParttwoBinding
     private val viewmodel: AuthViewModel by lazy { ViewModelProvider(this).get(AuthViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +34,7 @@ class AuthTPartFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        fragmentReplace = context as FragmentReplace?
     }
 
     override fun onCreateView(
@@ -88,7 +81,8 @@ class AuthTPartFragment : Fragment() {
             binding.textviewCamera.setOnClickListener {
                 binding.textviewCamera.startAnimation(mAlphaAnimation)
            //     askPermission()
-                dialog.dismiss()
+
+                fragmentReplace?.fragmentReplaceManager(CameraXFragment(),true)
             }
             binding.textviewFile.setOnClickListener {
                 binding.textviewFile.startAnimation(mAlphaAnimation)
@@ -100,9 +94,6 @@ class AuthTPartFragment : Fragment() {
 
 
     }
-
-
-
     //------------------------------------------------------------------------------------------------------------------
    /*
    fun askPermission() {
@@ -139,6 +130,12 @@ class AuthTPartFragment : Fragment() {
     */
     //------------------------------------------------------------------------------------------------------------------
 
+
+
+
+
+
+
     val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
 
         if (uri != null) {
@@ -154,7 +151,7 @@ class AuthTPartFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-
+        fragmentReplace = null
     }
 
     fun checkData(model: UserModel) {
