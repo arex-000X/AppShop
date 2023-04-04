@@ -14,16 +14,17 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.google.common.util.concurrent.ListenableFuture
 import com.karaev.andrew.appshop.authentication.repository.UserRepository
 import com.karaev.andrew.appshop.databinding.CameraPreviewBinding
 import java.util.concurrent.Future
 
 class CameraXFragment:Fragment() {
     private lateinit var binding: CameraPreviewBinding
-    val cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity().application)
+    private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
     }
 
     override fun onAttach(context: Context) {
@@ -45,7 +46,8 @@ class CameraXFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-    cameraProviderFuture.addListener(Runnable {
+
+   cameraProviderFuture.addListener(Runnable {
         val cameraProvider = cameraProviderFuture.get()
         bindPreview(cameraProvider)
     },ContextCompat.getMainExecutor(requireContext()))

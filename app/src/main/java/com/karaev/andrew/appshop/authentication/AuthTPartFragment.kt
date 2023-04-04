@@ -3,12 +3,15 @@ package com.karaev.andrew.appshop.authentication
 import android.Manifest
 import android.app.Dialog
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.karaev.andrew.appshop.CameraXFragment
@@ -24,7 +27,8 @@ const val REQUEST_CODE = 20
 
 class AuthTPartFragment : Fragment() {
     private var fragmentReplace: FragmentReplace? = null
-   // private val requestPermission = listOf(Manifest.permission.CAMERA)
+
+     private val requestPermission = listOf(Manifest.permission.CAMERA)
     private lateinit var binding: FragmentParttwoBinding
     private val viewmodel: AuthViewModel by lazy { ViewModelProvider(this).get(AuthViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,16 +77,15 @@ class AuthTPartFragment : Fragment() {
 
     fun showDialog() {
         val mAlphaAnimation = AnimationUtils.loadAnimation(context, R.anim.alpha_animation);
-      val  binding = DialogCustomBinding.inflate(layoutInflater)
+        val binding = DialogCustomBinding.inflate(layoutInflater)
         val dialog = Dialog(requireActivity())
         dialog.apply {
             setContentView(binding.root)
             setCancelable(true)
             binding.textviewCamera.setOnClickListener {
                 binding.textviewCamera.startAnimation(mAlphaAnimation)
-           //     askPermission()
-
-                fragmentReplace?.fragmentReplaceManager(CameraXFragment(),true)
+                askPermission()
+                dialog.dismiss()
             }
             binding.textviewFile.setOnClickListener {
                 binding.textviewFile.startAnimation(mAlphaAnimation)
@@ -95,43 +98,23 @@ class AuthTPartFragment : Fragment() {
 
     }
     //------------------------------------------------------------------------------------------------------------------
-   /*
-   fun askPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this.requireContext(),
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this.requireActivity(),
-                requestPermission.toTypedArray(), 101
-            )
+
+    fun askPermission() {
+         if (ContextCompat.checkSelfPermission(
+                 this.requireContext(),
+                 Manifest.permission.CAMERA
+             ) != PackageManager.PERMISSION_GRANTED
+         ) {
+             ActivityCompat.requestPermissions(
+                 this.requireActivity(),
+                 requestPermission.toTypedArray(), 101
+             )
 
 
-        } else {
-          //  openCamera()
-        }
-    }
-
-   fun openCamera() {
-        val intent = Intent()
-        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE)
-        launcher.launch(intent)
-
-    }
-    }
-   val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == 101) {
-           val image = it.data?.extras?.getString("data") as Bitmap
-             binding.photoCameraAdd.setImageBitmap(image)
-            Log.d("PhotoPicker", "Selected URI: $image")
-        }
-    }
-    */
-    //------------------------------------------------------------------------------------------------------------------
-
-
-
+         } else {
+             fragmentReplace?.fragmentReplaceManager(CameraXFragment(), true)
+         }
+     }
 
 
 
@@ -145,8 +128,6 @@ class AuthTPartFragment : Fragment() {
             Log.d("PhotoPicker", "No media selected")
         }
     }
-
-
 
 
     override fun onDestroy() {
