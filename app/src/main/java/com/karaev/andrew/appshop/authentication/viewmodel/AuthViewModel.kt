@@ -14,14 +14,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class AuthViewModel(application: Application): AndroidViewModel(application) {
+class AuthViewModel(): ViewModel() {
 
     private val readAllData: LiveData<List<UserModel>>
     private val repository: UserRepository
 
     init {
-        val userDao = UserDatabase.getDatabase(application).userDao()
-        repository = UserRepository(userDao)
+        repository = UserRepository.get()
         readAllData = repository.readAllData
     }
 
